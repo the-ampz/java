@@ -1,5 +1,6 @@
 package br.com.fiap.energysaving.controller;
 
+import br.com.fiap.energysaving.dto.endereco.UserEnderecoDTO;
 import br.com.fiap.energysaving.dto.errors.ValidationErrorDTO;
 import br.com.fiap.energysaving.dto.user.UpdateUserDTO;
 import br.com.fiap.energysaving.dto.user.UserDetailsDTO;
@@ -40,12 +41,29 @@ public class UserController {
         return user.getEnderecos();
     }
 
-    // Adicionar endereço para um usuário
-    @PostMapping("/{userId}/enderecos")
-    public EnderecoUser addEnderecoToUser(@PathVariable Long userId, @RequestBody EnderecoUser enderecoUser) {
+    @PostMapping("/{userId}")
+    @Operation(summary = "Cadastrar endereço de um usuário", description = "Este endpoint associa um endereço ao usuário com o ID fornecido.")
+    public ResponseEntity<EnderecoUser> addEnderecoToUser(
+            @PathVariable Long userId,
+            @RequestBody @Valid UserEnderecoDTO createAddressDTO) {
+
+        // Buscar o usuário pelo ID
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-        enderecoUser.setUser(user);
-        return enderecoUserRepository.save(enderecoUser);
+
+        // Criar uma nova entidade EnderecoUser a partir do DTO
+        EnderecoUser enderecoUser = new EnderecoUser();
+        enderecoUser.setDs_street(createAddressDTO.street());
+        enderecoUser.setDs_number(createAddressDTO.number());
+        enderecoUser.setDs_complement(createAddressDTO.complement());
+        enderecoUser.setDs_city(createAddressDTO.city());
+        enderecoUser.setDs_state (createAddressDTO.state());
+        enderecoUser.setUser(user);  // Associar o endereço ao usuário
+
+        // Salvar o endereço no banco de dados
+        enderecoUserRepository.save(enderecoUser);
+
+        // Retornar a resposta
+        return ResponseEntity.status(201).body(enderecoUser);
     }
 
     @GetMapping("/me")

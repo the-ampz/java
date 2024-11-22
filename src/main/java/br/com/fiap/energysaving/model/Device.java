@@ -9,23 +9,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_GXP_DEVICE")
+@Table(name = "T_AMPZ_DEVICE")
 public class Device {
 
     @Id
-    @GeneratedValue
-    private Long id_device;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idDevice;
 
-    private String ds_name;
+    private String name;
+    private String type;
+    private String operatingSystem;
+    private Double energyConsumption;
+    private Double energySaved;
 
-    private String ds_type;
-
-    private String ds_operating_system;
-
-    private int vl_energy_consumption;
-
-    private int vl_energy_saved;
-
+    // Relacionamento com Kid
     @ManyToOne
     @JoinColumn(name = "id_kid")
     private Kid kid;
