@@ -21,7 +21,7 @@ public record UserDetailsDTO(
 ) {
     public UserDetailsDTO(User user){
         this(
-                user.getId_user(),
+                user.getId(),
                 user.getName(),
                 user.getEmail(),
                 user.getBirthdate()

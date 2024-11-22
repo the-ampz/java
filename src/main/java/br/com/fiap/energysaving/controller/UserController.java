@@ -3,7 +3,9 @@ package br.com.fiap.energysaving.controller;
 import br.com.fiap.energysaving.dto.errors.ValidationErrorDTO;
 import br.com.fiap.energysaving.dto.user.UpdateUserDTO;
 import br.com.fiap.energysaving.dto.user.UserDetailsDTO;
+import br.com.fiap.energysaving.model.EnderecoUser;
 import br.com.fiap.energysaving.model.User;
+import br.com.fiap.energysaving.repository.EnderecoUserRepository;
 import br.com.fiap.energysaving.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,6 +22,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 @Tag(name = "Usuários", description = "Operações relacionadas aos usuários.")
@@ -27,6 +31,22 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EnderecoUserRepository enderecoUserRepository;
+
+    @GetMapping("/{userId}/enderecos")
+    public List<EnderecoUser> getEnderecosByUser(@PathVariable Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getEnderecos();
+    }
+
+    // Adicionar endereço para um usuário
+    @PostMapping("/{userId}/enderecos")
+    public EnderecoUser addEnderecoToUser(@PathVariable Long userId, @RequestBody EnderecoUser enderecoUser) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        enderecoUser.setUser(user);
+        return enderecoUserRepository.save(enderecoUser);
+    }
 
     @GetMapping("/me")
     @Operation(summary = "Obter perfil do usuário logado", description = "Obtém os detalhes do perfil do usuário logado.")
