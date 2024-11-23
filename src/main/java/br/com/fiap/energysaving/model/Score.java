@@ -5,27 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_GXP_SCORE")
+@Table(name = "T_AMPZ_SCORE")
 public class Score {
+
     @Id
-    @GeneratedValue
-    private Long id_score;
-
-    private int vl_points;
-
-    private Date dt_completion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idScore;
 
     @ManyToOne
-    @JoinColumn(name = "id_kid")
+    @JoinColumn(name = "id_kid", nullable = false)
     private Kid kid;
 
-    @ManyToOne
-    @JoinColumn(name = "id_challenge")
-    private Challenge challenge;
+    @Column(name = "id_challenge", nullable = false)
+    private Long idChallenge;
+
+    private Double vlPoints;
+
+    private LocalDate dtCompletion;
 }

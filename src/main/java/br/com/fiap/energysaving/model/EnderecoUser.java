@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_GXP_ADDRESS")
+@Table(name = "T_AMPZ_ADDRESS")
 public class EnderecoUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

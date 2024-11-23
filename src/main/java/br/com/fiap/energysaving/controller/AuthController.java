@@ -89,21 +89,4 @@ public class AuthController {
         return ResponseEntity.created(uriBuilder).body(new UserDetailsDTO(user));
     }
 
-    @PostMapping("/recover-password")
-    @Operation(summary = "Recuperar senha", description = "Envia um e-mail com instruções para recuperação de senha.")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "E-mail enviado com sucesso."),
-            @ApiResponse(responseCode = "400", description = "Dados inválidos.", content = @Content(schema = @Schema(implementation = ValidationErrorDTO.class), mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado.")
-    })
-    public ResponseEntity<Void> recoverPassword(@RequestBody @Valid RecoverPasswordDTO recoverPasswordDTO) {
-        var user = userRepository.findByEmail(recoverPasswordDTO.email());
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        // TODO: Send email with password recovery instructions
-
-        return ResponseEntity.ok().build();
-    }
 }

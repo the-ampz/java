@@ -5,29 +5,36 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_GXP_CHALLENGE_GOAL")
+@Table(name = "T_AMPZ_CHALLENGE_GOAL")
 public class Challenge {
+
     @Id
-    @GeneratedValue
-    private long id_challenge;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idChallenge;
 
-    private String ds_description;
+    @Lob
+    @Column(name = "ds_description", nullable = false)
+    private String description;
 
-    private int vl_score;
+    @Column(name = "vl_score", nullable = false)
+    private Integer score;
 
-    private Date dt_start;
+    @Column(name = "dt_start", nullable = false)
+    private LocalDate startDate;
 
-    private Date dt_end;
+    @Column(name = "dt_end", nullable = false)
+    private LocalDate endDate;
 
-    private int vl_energy_required;
+    @Column(name = "vl_energy_required", nullable = false)
+    private Double energyRequired;
 
     @ManyToOne
-    @JoinColumn(name = "id_community")
+    @JoinColumn(name = "id_community", nullable = false)
     private Community community;
 }

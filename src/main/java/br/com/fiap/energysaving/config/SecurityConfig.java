@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
                     req.requestMatchers(HttpMethod.POST, "/users/{userId}/enderecos").authenticated();
+                    req.requestMatchers(HttpMethod.POST, "/users/insertUser").permitAll();
                     req.requestMatchers(ROUTE_ALLOWLIST).permitAll();
                     req.anyRequest().authenticated(); })
                 .cors(AbstractHttpConfigurer::disable)

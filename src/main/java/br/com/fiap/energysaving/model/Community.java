@@ -1,9 +1,6 @@
 package br.com.fiap.energysaving.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,15 +9,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_GXP_COMMUNITY")
+@Table(name = "T_AMPZ_COMMUNITY")
 public class Community {
+
     @Id
-    @GeneratedValue
-    private Long id_community;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idCommunity;
 
-    private String ds_name;
+    @Column(name = "ds_name", nullable = false, length = 100)
+    private String name;
 
-    private String ds_description;
+    @Lob
+    @Column(name = "ds_description", nullable = false)
+    private String description;
 
-    private int total_points;
+    @Column(name = "total_points", nullable = false)
+    private Integer totalPoints;
 }

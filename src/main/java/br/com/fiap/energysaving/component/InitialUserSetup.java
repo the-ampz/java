@@ -19,9 +19,7 @@ public class InitialUserSetup {
 
     @PostConstruct
     public void createInitialUser() {
-        // Verifica se já existe um usuário no banco
         if (userRepository.count() == 0) {
-            // Cria um usuário inicial
             User adminUser = new User(
                     "Admin",
                     "admin@example.com",

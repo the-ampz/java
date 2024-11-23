@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "T_GXP_USER")
+@Table(name = "T_AMPZ_USER")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

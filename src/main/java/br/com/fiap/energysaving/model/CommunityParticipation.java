@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "T_GXP_COMMUNITY_PARTICIPATION")
+@Table(name = "T_AMPZ_COMMUNITY_PARTICIPATION")
 public class CommunityParticipation {
-    @Id
-    @GeneratedValue
-    private Long id_participation;
 
-    private int points;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idParticipation;
 
     @ManyToOne
-    @JoinColumn(name = "id_kid")
+    @JoinColumn(name = "id_kid", nullable = false)
     private Kid kid;
 
-    @ManyToOne
-    @JoinColumn(name = "id_community")
-    private Community community;
+    @Column(name = "id_community", nullable = false)
+    private Long idCommunity;
+
+    private Integer points;
 }
