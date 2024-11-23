@@ -50,8 +50,6 @@ Certifique-se de que os seguintes programas estão instalados no seu sistema:
 
 - [Java 17+](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
 - [Maven 3.8+](https://maven.apache.org/download.cgi)
-- [MySQL Server](https://dev.mysql.com/downloads/mysql/)
-- [Postman](https://www.postman.com/) (opcional, para testar as APIs)
 
 ### Passo a Passo
 
