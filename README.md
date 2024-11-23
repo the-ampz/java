@@ -30,7 +30,7 @@ A solução apresenta alta viabilidade técnica e facilidade de uso:
 
 ## 🎥 Pré-visualização do projeto
 
-[Link para o vídeo](https://www.youtube.com/watch?v=P3Hi4C2hoY4) apresentando o sistema.
+[Link para o vídeo](https://www.youtube.com/watch?v=XD_s9rMg8LU) apresentando o sistema.
 
 ---
 
